@@ -16,7 +16,6 @@ print(models.data[0].id)
 image_resp = openai.Image.create(prompt="two dogs playing chess, oil painting", n=1, size="512x512")
 
 
-
 # print the completion
 # print(completion.choices[0].text)
 # print(chat.choices[0].message.content)

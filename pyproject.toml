@@ -19,6 +19,7 @@ python = "^3.10.6"
 # Everything below here is alphabetically sorted
 openai = "^0.27.2"
 langchain = "^0.0.121"
+wikipedia = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 # Everything below here is alphabetically sorted

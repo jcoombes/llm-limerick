@@ -5,20 +5,11 @@ import webbrowser
 from typing import Any, List, Mapping, Optional
 
 import openai
-from langchain import LLMMathChain, SerpAPIWrapper
-from langchain.agents import Tool, initialize_agent, tool
+from langchain.agents import Tool, tool
 from langchain.chains import LLMChain, SimpleSequentialChain
-from langchain.chains.base import Chain
 from langchain.chat_models import ChatOpenAI
-from langchain.llms import OpenAI
-from langchain.llms.base import LLM
 from langchain.prompts import PromptTemplate
 from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate
-
-# print(webbrowser.open_new_tab(image_resp.data[0].url))
-
-
-# image_resp = openai.Image.create(prompt="two dogs playing chess, oil painting", n=1, size="512x512")
 
 
 @tool(return_direct=True)
@@ -71,10 +62,6 @@ class TimeChain(LLMChain):
         desc = LLMChain._call(self, inputs)
         return {'dalle-description': desc['text']}
 
-# tools = [get_time, picture]
-# agent = initialize_agent(tools, llm=OpenAI(temperature=0), agent="zero-shot-react-description", verbose=True)
-
-
 human_asks_dumb_question_about_shadows_prompt = HumanMessagePromptTemplate(
         prompt=PromptTemplate(
             template="Suggest whether the sun at {time_and_location} might be likely to be high in the sky or low in the sky? What might the shadows in this location be like? Ensure your answer starts with 'Here in {time_and_location},'",
@@ -97,9 +84,6 @@ chat_prompt_template = ChatPromptTemplate.from_messages([human_message_prompt])
 chat = ChatOpenAI(temperature=0.9)
 chain = LLMChain(llm=chat, prompt=chat_prompt_template)
 print(chain.run("Limerick"))
-
-"""
-"""
 
 second_prompt = PromptTemplate(
     input_variables=["picture_prompt"],
